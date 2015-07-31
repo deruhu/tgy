@@ -80,6 +80,14 @@ build_blueesc_addresses:
 		mv blueesc.hex blueesc"_id"$$MOTOR_ID."hex" || exit -1; \
 	done
 
+build_afr0_hv_addresses:
+	for MOTOR_ID in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16; do \
+		make clean; \
+		export MOTOR_ID; \
+		make afro_hv.hex || exit -1; \
+		mv afro_hv.hex afro_hv"_id"$$MOTOR_ID."hex" || exit -1; \
+	done
+
 build_blueesc_addresses_zip:
 	make build_blueesc_addresses; \
 	TARGET="blueesc_firmware_`date '+%Y-%m-%d'`_`git rev-parse --verify --short HEAD`.zip"; \
